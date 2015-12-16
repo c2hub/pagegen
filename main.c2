@@ -1,0 +1,70 @@
+module pagegen;
+
+import stdio as io;
+import stdlib local;
+import c2vector as vctr local;
+import utils local;
+import string local;
+
+vector files;
+
+public func int32 main()
+{
+	vctr.init(&files);
+	char[1024] buf;
+    while(strcmp(buf, "/") != 0)
+    {
+        puts(getcwd(buf, 1024));
+        if(access("pagelist.txt", R_OK) == 0)
+        {
+            char* pagelist;
+            pagelist = loadfile(pagelist.txt);
+            parse(pagelist);
+            break;
+        }
+        chdir("../");
+    }
+    if(access("template.txt", R_OK) == 0)
+    {
+        int32 templsize = sizeof(loadfile("template.txt"));
+        char* template = cast<char*>(malloc(templsize));
+        template = loadfile("template.txt");
+        
+        for(int32 i = 0; i < vctr.total(&files); i++)
+        {
+            char* name = vctr.get(&files, i);
+            int32 contentsize = sizeof(loadfile("template.txt"));
+            char* content = malloc(contentsize); content = loadfile(name);
+            char* complete = malloc(templsize + contentsize);
+            sprintf(complete, template, content);
+            
+            char[80] fullname;
+            sprintf(fullname, "%s.html", name);
+            FILE* fp = fopen(fullname, "ab+");
+            if (fp != nil) 
+            {
+                //TODO: STUFF
+            }
+        }
+    }
+	return 0;
+}
+
+public func int32 parse(char* pagelist)
+{
+       char[4096] buffer;
+       strcpy(buffer, pagelist);
+       
+       char* token = strsep(&buffer, '\n');
+       while(token != nil)
+       {
+           if(strcmp(token, "") != 0)
+           {
+               token = strsep(&buffer, '\n');
+               continue;
+           }
+           vctr.add(&files, token);
+           token = strsep(&buffer, '\n');
+       }
+       return 0;
+}

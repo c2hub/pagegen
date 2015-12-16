@@ -1,0 +1,7 @@
+target pagegen
+    $generate-c
+    $warnings no-unused
+    main.c2
+    utils.c2
+    c2vector.c2
+end
