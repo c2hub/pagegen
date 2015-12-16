@@ -8,7 +8,7 @@ public type file
     char* content;
 }
 
-public func int32 loadfile(char* file)
+public func char* loadfile(char* file)
 {
     FILE *fp;
     int32 lSize;
