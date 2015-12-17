@@ -1,15 +1,12 @@
 module utils;
 
 import stdio local;
-
-public type file
-{
-    char* name;
-    char* content;
-}
+import stdlib local;
+import pagegen local;
 
 public func char* loadfile(char* file)
 {
+    tprintf("loading %s\n", file);
     FILE *fp;
     int32 lSize;
     char *buffer;
@@ -41,5 +38,22 @@ public func char* loadfile(char* file)
         exit(1);
     }
     fclose(fp);
+    tprintf("loaded %s\n", file);
     return buffer;
+}
+
+public func void tprintf(char* format, void* which)
+{
+    if(pagegen.debug)
+    {
+        printf(format, which);
+    }
+}
+
+public func void tputs(char* what)
+{
+    if(pagegen.debug)
+    {
+        puts(what);
+    }
 }
