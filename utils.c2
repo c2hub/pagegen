@@ -45,6 +45,7 @@ public func char* loadfile(char* file)
     return buffer;
 }
 
+//prints stuff only in debug mode
 public func void tprintf(char* format, void* which)
 {
     if(pagegen.debug)
