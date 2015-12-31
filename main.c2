@@ -13,10 +13,12 @@ public bool debug = 1;
 public func int32 main()
 {
 	vctr.init(&files);
-	char[1024] buf;
-    while(strcmp(buf, "/") != 0)
+	char[1024] buffer;
+    
+    while(strcmp(buffer, "/") != 0)
     {
-        tputs(getcwd(buf, 1024));
+        tputs(getcwd(buffer, 1024));
+        
         if(access("pagelist.txt", R_OK) == 0)
         {
             tputs("found");
@@ -35,13 +37,17 @@ public func int32 main()
         char* template = loadfile("template.txt");
         tputs("template loaded");
         tprintf("number of stuff in the vector: %d\n", cast<void*>(vctr.total(&files)));
+        
         for(int32 i = 0; i < vctr.total(&files); i++)
         {
             char* name = vctr.get(&files, i);
             char* noext = strdup(name);
             char* trunc;
+            
             if ( (trunc = strstr( noext, ".half" )) != nil )
-            *trunc = '\0';
+            {
+                *trunc = '\0';
+            }
             tprintf("building %s\n", name);
             char* content = loadfile(name);
             char* complete = malloc(sizeof(template) + sizeof(content));
@@ -68,6 +74,7 @@ public func int32 parse(char* pagelist)
     char* token = strsep(&buffer, "\n");
     tputs("started strsep");
     tputs(token);
+    
     while(token != nil)
     {
         if(strcmp(token, "") == 0)
