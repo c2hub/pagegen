@@ -15,7 +15,7 @@ The place where you wish content to be placed should be marked with "%s".
 Example of a template.txt:
 
     Hello, my name is %s, what is yours?
-	
+
 It is really just about the presence of %s;
 
 ## V2.0 Plans
@@ -26,11 +26,11 @@ will be new syntax for content:
     it can span many
     many lines
     [a href="website.com"] this is a link
-    
+
 It will also be possible to make elements inside elements:
-    
+
     [p] this is a paragraph with a [a href="website.com", link] inside.
-    
+
 Nested elements spanning on multiple lines too?
 
     [div]
