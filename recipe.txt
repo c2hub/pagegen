@@ -1,4 +1,4 @@
-target pagegen
+executable pagegen
     $generate-c
     $warnings no-unused
     main.c2
