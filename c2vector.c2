@@ -27,7 +27,7 @@ public func int32 total(vector* v)
 func void resize(vector* v, int32 capacity)
 {
     void** items = realloc(v.items, sizeof(void *) * capacity);
-    if (items != nil) 
+    if (items != nil)
 	{
         v.items = items;
         v.capacity = capacity;
@@ -61,7 +61,7 @@ public func void delete(vector* v, int32 index)
 
     v.items[index] = nil;
 
-    for (int32 i = index; i < v.total - 1; i++) 
+    for (int32 i = index; i < v.total - 1; i++)
 	{
         v.items[i] = v.items[i + 1];
         v.items[i + 1] = nil;

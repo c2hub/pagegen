@@ -13,11 +13,11 @@ public func char* loadfile(char* file)
 
     fp = fopen(file, "rb");
     if(!fp)
-    { 
+    {
         perror(file);
         exit(1);
     }
-    
+
     fseek(fp, 0L, SEEK_END);
     lSize = ftell(fp);
     rewind(fp);
@@ -38,10 +38,10 @@ public func char* loadfile(char* file)
         fputs("entire read fails", stderr);
         exit(1);
     }
-    
+
     fclose(fp);
     tprintf("loaded %s\n", file);
-    
+
     return buffer;
 }
 
